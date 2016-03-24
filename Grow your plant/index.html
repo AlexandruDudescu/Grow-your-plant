@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.2.0.min.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script src="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/js/metro.min.js"></script>
+
+    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro.min.css" rel="stylesheet">
+    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro-responsive.min.css" rel="stylesheet" />
+    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro-schemes.min.css" rel="stylesheet" />
+    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro-rtl.min.css" rel="stylesheet" />
+    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro-icons.min.css" rel="stylesheet" />
+    <style>
+    .alert-box
+    {
+      background:#ffecec;
+      border:1px solid #f5aca6;
+      color:#8AB446;
+      border-radius:10px;
+      font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+      padding:10px 10px 10px 36px;
+      margin-left:20%;
+      margin-right:20%;
+      margin-top: 3em;
+    }
+    .alert-box > *
+    {
+      display: inline-block;
+      margin: 0 auto;
+    }
+    </style>
+</head>
+<body bgcolor="#8AB446">
+
+
+
+  <div class = "alert-box error">
+
+      <div style="width:50%; ">
+          <h2>
+              Looks like your plant needs more *C
+              <br />
+              <small>
+                  Just imagine all the possibilities!
+              </small>
+          </h2>
+      </div>
+      <span class="mif-thermometer mif-4x" ></span>
+  </div>
+  <div class = "alert-box">
+      <div style="width:50%; ">
+          <h2>
+              This is how h1 looks like
+              <br />
+              <small>
+                  Just imagine all the possibilities!
+              </small>
+          </h2>
+      </div>
+    <span class="mif-water mif-4x" style="color: lightskyblue;"></span>
+  </div>
+  <div class = "alert-box error">
+      <div style="width:50%; ">
+          <h2>
+              This is how h1 looks like
+              <br />
+              <small>
+                  Just imagine all the possibilities!
+              </small>
+          </h2>
+      </div>
+    <span class="mif-sun mif-4x" style="color: yellow;"></span>
+  </div>
+
+
+
+
+</body>
+</html>
