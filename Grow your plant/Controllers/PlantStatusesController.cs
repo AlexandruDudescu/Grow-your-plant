@@ -17,7 +17,7 @@ namespace Grow_your_plant.Controllers
         }
 
         [HttpPost]
-        public void AddEmployee(PlantStatus newStatus)
+        public void AddNewStatus(PlantStatus newStatus)
         {
             PlantStatusRepository.AddStatus(newStatus);
             GlobalHost.ConnectionManager.GetHubContext<PlantStatusHub>().Clients.All.publishPost(newStatus);
@@ -27,6 +27,12 @@ namespace Grow_your_plant.Controllers
         public List<PlantStatus> GetLastStatuses()
         {
             return PlantStatusRepository.GetLatestStatuses();
+        }
+
+        [HttpGet]
+        public string TestHelloWorld()
+        {
+            return "Hello World";
         }
     }
 }

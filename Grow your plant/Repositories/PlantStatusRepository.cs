@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Grow_your_plant.Models;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 
 namespace Grow_your_plant.Repositories
 {
@@ -28,7 +30,10 @@ namespace Grow_your_plant.Repositories
 
         public List<PlantStatus> GetLatestStatuses()
         {
-            return PlantStatusContext.PlantStatuses.Take(5).ToList();
+            List<PlantStatus> plantStatusList = PlantStatusContext.PlantStatuses.OrderByDescending(p => p.PlantStatudID).Take(5).ToList();
+            plantStatusList.Reverse();
+
+            return plantStatusList;
         }
 
         public PlantStatus GetLastStatus()

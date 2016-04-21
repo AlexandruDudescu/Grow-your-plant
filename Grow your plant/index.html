@@ -36,8 +36,23 @@
 </head>
 <body bgcolor="#8AB446">
 
-
-
+    <div class="app-bar">
+        <ul class="app-bar-menu">
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="" class="dropdown-toggle">Your plants</a>
+                <ul class="d-menu" data-role="dropdown">
+                    <li><a href="">Rose</a></li>
+                    <li><a href="">Cucumber</a></li>
+                    <li><a href="">Lemon Tree</a></li>
+                </ul>
+            </li>
+            <li><a href="">Manage plants</a></li>
+            <li><a href="">Support</a></li>
+            <li><a href="">Help</a></li>
+        </ul>
+    </div>
+    <!--
   <div class = "alert-box error">
 
       <div style="width:50%; ">
@@ -75,9 +90,87 @@
       </div>
     <span class="mif-sun mif-4x" style="color: yellow;"></span>
   </div>
+        -->
+    <div class="input-control modern text" style="margin: 50px;">
+        <input id="firstNameInput" type="number">
+    </div>
 
+    <div class="input-control modern text" style="margin: 50px;">
+        <input id="lastNameInput" type="number">
+    </div>
 
+    <div class="input-control modern text" style="margin: 50px;">
+        <input id="ageInput" type="number"> 
+    </div>
 
+    <button class="button cycle-button" id="addNewStatus">+</button>
 
+    <ul style="list-style:none;" id="plantStatusesList"></ul>
+
+    <script type="text/javascript">
+
+        $.ajax(
+            {
+                url: '/api/PlantStatuses/GetLastStatuses',
+                method: 'GET',
+                dataType: 'json',
+                success: addPlantStatusesList
+            });
+
+        function addPlantStatusesList(plantStatuses)
+        {
+            $.each(plantStatuses, function (index) {
+                var plantStatus = plantStatuses[index];
+                addPlantStatus(plantStatus);
+            });
+        }
+
+        function addPlantStatus(plantStatus)
+        {
+            $("#plantStatusesList").prepend(
+                '<li>' +
+                '<div class = "alert-box error">' +
+                  '<div style="width:50%; ">' +
+                      '<h2>' +
+                          'Temperature: ' + plantStatus.Temperature + '<br>' +
+                          'Luminosity: ' + plantStatus.Luminosity + '<br>' +
+                          'Umidity: ' + plantStatus.Umidity + '<br><br>' +
+
+                          '<small>' +
+                              plantStatus.StatusTime +
+                          '</small>' +
+                      '</h2>' +
+                  '</div>' +
+             '</div>' +
+             '</li>'
+                );
+            
+        }
+
+        var hub = $.connection.plantStatusHub;
+        hub.client.publishPost = addPlantStatus;
+
+        $("#addNewStatus").click(function () {
+
+            var date = Date($.now()).toString().split('G');   
+
+            var plant = {
+                Temperature: $("#firstNameInput").val(),
+                Umidity: $("#lastNameInput").val(),
+                Luminosity: $("#ageInput").val(),
+                StatusTime: date[0]
+            };
+
+            $.ajax({
+                url: '/api/PlantStatuses/AddNewStatus',
+                method: 'POST',
+                dataType: 'json',
+                data: plant
+            });
+
+        });
+
+        $.connection.hub.start();
+</script>
 </body>
 </html>

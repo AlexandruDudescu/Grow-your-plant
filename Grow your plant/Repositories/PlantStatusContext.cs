@@ -11,9 +11,9 @@ namespace Grow_your_plant.Repositories
     {
         public DbSet<PlantStatus> PlantStatuses { get; set; }
 
-        public PlantStatusContext(): base("name=EmployeeDbConnectionString")
+        public PlantStatusContext(): base("name=PlantDbConnectionString")
         {
-                
+
         }
     }
 }
