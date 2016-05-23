@@ -10,10 +10,13 @@ namespace Grow_your_plant.Controllers
     public class PlantStatusesController : ApiController
     {
         private IPlantStatusRepository PlantStatusRepository { get; set; }
+        //private IArduinoManager ArduinoManager { get; set; }
 
+        static int x;
         public PlantStatusesController()
         {
             PlantStatusRepository = new PlantStatusRepository();
+            //ArduinoManager = new ArduinoManager();
         }
 
         [HttpPost]
@@ -29,10 +32,14 @@ namespace Grow_your_plant.Controllers
             return PlantStatusRepository.GetLatestStatuses();
         }
 
-        [HttpGet]
-        public string TestHelloWorld()
+        [HttpPost]
+        public void GetInstantStatus()
         {
-            return "Hello World";
+            //PlantStatus instantPlantStatus = ArduinoManager.GetParameters();
+            PlantStatus instantPlantStatus = new PlantStatus(1, 1, 1, (x++).ToString());
+            
+            PlantStatusRepository.AddStatus(instantPlantStatus);
+            GlobalHost.ConnectionManager.GetHubContext<PlantStatusHub>().Clients.All.publishPost(instantPlantStatus);
         }
     }
 }
