@@ -10,6 +10,7 @@ namespace Grow_your_plant.Repositories
     public class PlantStatusContext : DbContext
     {
         public DbSet<PlantStatus> PlantStatuses { get; set; }
+        //public DbSet<IdealPlantStatus> IdealPlantStatuses { get; set; }
 
         public PlantStatusContext(): base("name=PlantDbConnectionString")
         {

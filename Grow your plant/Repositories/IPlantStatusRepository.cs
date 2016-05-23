@@ -7,6 +7,7 @@ namespace Grow_your_plant.Repositories
     {
         void AddStatus(PlantStatus plantStatus);
         PlantStatus GetLastStatus();
+        PlantStatus GetInstantStatus();
         List<PlantStatus> GetAllStatuses();
         List<PlantStatus> GetLatestStatuses();
     }
