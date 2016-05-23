@@ -11,17 +11,17 @@ namespace Grow_your_plant.Models
         [Key]
         public int PlantStatudID { get; set; }
         public double Temperature { get; set; }
-        public double Umidity { get; set; }
+        public double Humidity { get; set; }
         public double Luminosity { get; set; }
 
         public string StatusTime { get; set; }
 
-        public PlantStatus(double temperature, double umidity, double luminosity)
+        public PlantStatus(double temperature, double humidity, double luminosity, string statusTime)
         {
             Temperature = temperature;
-            Umidity = umidity;
+            Humidity = humidity;
             Luminosity = luminosity;
-            StatusTime = DateTime.UtcNow.ToString();
+            StatusTime = statusTime;
         }
 
         public PlantStatus()
