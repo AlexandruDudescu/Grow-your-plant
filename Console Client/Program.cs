@@ -1,50 +1,62 @@
-﻿using Microsoft.AspNet.SignalR.Client;
-using Newtonsoft.Json;
-
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNet.SignalR.Client;
 
-namespace SocialNetwork.Console
+using Grow_your_plant.Models;
+using Grow_your_plant.Arduino;
+
+namespace SocialNeGrow_your_plant.Console
 {
     class Program
-    {
+    {         
+        private static DateTime startTime = DateTime.Now;
+        private static TimeSpan spanTime = TimeSpan.FromSeconds(5);
+        private static IArduinoManager ArduinoManager;
+
         static void Main()
         {
-            RunAsync().Wait();
-            System.Console.ReadLine();
-        }
+            ArduinoManager = new ArduinoManager();
 
-        static async Task RunAsync()
+            while(true)
+            {
+                while (DateTime.Now < startTime + spanTime);
+                PlantStatus CurrentPlantStatus = ArduinoManager.GetPlantStatus();
+                PostAsync(CurrentPlantStatus).Wait();
+                startTime = DateTime.Now;
+            }
+        }
+        
+        static async Task PostAsync(PlantStatus plantStatus)
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:26315");
+                client.BaseAddress = new Uri("http://localhost:56284");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync("api/Posts/GetPosts");
-                if (response.IsSuccessStatusCode)
+                //Http post
+                HttpResponseMessage response = await client.PostAsJsonAsync("api/PlantStatuses/AddNewStatus", plantStatus);
+
+                if(response.IsSuccessStatusCode)
                 {
-                    var data = await response.Content.ReadAsStringAsync();
-                    var posts = JsonConvert.DeserializeObject<List<plantStatus>>(data);
-                    foreach (var post in posts)
-                        PrintPost(post);
+                    System.Console.WriteLine("Status Posted succesfully!");
+                    PrintPost(plantStatus);
+                }
+                else
+                {
+                    System.Console.WriteLine("Attept unsuccesfull!");
                 }
             }
-
-            var hubConnection = new HubConnection("http://localhost:26315");
-            var hub = hubConnection.CreateHubProxy("PostHub");
-
-            hub.On<Post>("publishPost", (post) => PrintPost(post));
-            hubConnection.Start().Wait();
         }
 
-        static void PrintPost(Post post)
+        static void PrintPost(PlantStatus plantStatus)
         {
-            System.Console.WriteLine("{0}: {1}", post.UserName, post.Text);
+            System.Console.WriteLine("Here's how your plant felt recently:\nTemperature: {0}\nHumidity: {1}\nLuminosity: {2}\nSample date:{3}\n\n", plantStatus.Temperature, plantStatus.Humidity, plantStatus.Luminosity, plantStatus.StatusTime);
         }
+
     }
 }
