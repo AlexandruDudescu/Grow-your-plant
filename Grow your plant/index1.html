@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.2.0.min.js"></script>
+  <script src="/signalr/hubs"></script>
+  <script src="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/js/metro.min.js"></script>
+
+    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro.min.css" rel="stylesheet">
+    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro-responsive.min.css" rel="stylesheet" />
+    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro-schemes.min.css" rel="stylesheet" />
+    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro-rtl.min.css" rel="stylesheet" />
+    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro-icons.min.css" rel="stylesheet" />
+    <style>
+    .alert-box
+    {
+      background:#ffecec;
+      border:1px solid #f5aca6;
+      color:#8AB446;
+      border-radius:10px;
+      font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
+      padding:10px 10px 10px 36px;
+      margin-left:20%;
+      margin-right:20%;
+      margin-top: 3em;
+    }
+    .alert-box > *
+    {
+      display: inline-block;
+      margin: 0 auto;
+    }
+    </style>
+</head>
+<body bgcolor="#8AB446">
+
+    <div class="app-bar">
+        <ul class="app-bar-menu">
+            <li><a href="index.html">Home</a></li>
+            <li>
+                <a href="" class="dropdown-toggle">Your plants</a>
+                <ul class="d-menu" data-role="dropdown">
+                    <li><a href="">Rose</a></li>
+                    <li><a href="">Cucumber</a></li>
+                    <li><a href="">Lemon Tree</a></li>
+                </ul>
+            </li>
+            <li><a href="">Manage plants</a></li>
+            <li><a href="">Support</a></li>
+            <li><a href="">Help</a></li>
+        </ul>
+    </div>
+    <!--
+  <div class = "alert-box error">
+
+      <div style="width:50%; ">
+          <h2>
+              Looks like your plant needs more *C
+              <br />
+              <small>
+                  Just imagine all the possibilities!
+              </small>
+          </h2>
+      </div>
+      <span class="mif-thermometer mif-4x" ></span>
+  </div>
+  <div class = "alert-box">
+      <div style="width:50%; ">
+          <h2>
+              This is how h1 looks like
+              <br />
+              <small>
+                  Just imagine all the possibilities!
+              </small>
+          </h2>
+      </div>
+    <span class="mif-water mif-4x" style="color: lightskyblue;"></span>
+  </div>
+  <div class = "alert-box error">
+      <div style="width:50%; ">
+          <h2>
+              This is how h1 looks like
+              <br />
+              <small>
+                  Just imagine all the possibilities!
+              </small>
+          </h2>
+      </div>
+    <span class="mif-sun mif-4x" style="color: yellow;"></span>
+  </div>
+        -->
+    <div class="input-control modern text" style="margin: 50px;">
+        <input id="firstNameInput" type="number">
+    </div>
+
+    <div class="input-control modern text" style="margin: 50px;">
+        <input id="lastNameInput" type="number">
+    </div>
+
+    <div class="input-control modern text" style="margin: 50px;">
+        <input id="ageInput" type="number">
+    </div>
+
+    <button class="button cycle-button" id="addNewStatus">+</button>
+
+    <ul style="list-style:none;" id="plantStatusesList"></ul>
+
+    <script type="text/javascript">
+
+        $.ajax(
+            {
+                url: '/api/PlantStatuses/GetLastStatuses',
+                method: 'GET',
+                dataType: 'json',
+                success: addPlantStatusesList
+            });
+
+        function addPlantStatusesList(plantStatuses)
+        {
+            $.each(plantStatuses, function (index) {
+                var plantStatus = plantStatuses[index];
+                addPlantStatus(plantStatus);
+            });
+        }
+
+        function addPlantStatus(plantStatus)
+        {
+            $("#plantStatusesList").prepend(
+                '<li>' +
+                '<div class = "alert-box error">' +
+                  '<div style="width:50%; ">' +
+                      '<h2>' +
+                          'Temperature: ' + plantStatus.Temperature + '<br>' +
+                          'Luminosity: ' + plantStatus.Luminosity + '<br>' +
+                          'Umidity: ' + plantStatus.Umidity + '<br><br>' +
+
+                          '<small>' +
+                              plantStatus.StatusTime +
+                          '</small>' +
+                      '</h2>' +
+                  '</div>' +
+             '</div>' +
+             '</li>'
+                );
+
+        }
+
+        var hub = $.connection.plantStatusHub;
+        hub.client.publishPost = addPlantStatus;
+
+        $("#addNewStatus").click(function () {
+
+            var date = Date($.now()).toString().split('G');
+
+            var plant = {
+                Temperature: $("#firstNameInput").val(),
+                Umidity: $("#lastNameInput").val(),
+                Luminosity: $("#ageInput").val(),
+                StatusTime: date[0]
+            };
+
+            $.ajax({
+                url: '/api/PlantStatuses/AddNewStatus',
+                method: 'POST',
+                dataType: 'json',
+                data: plant
+            });
+
+        });
+
+        $.connection.hub.start();
+</script>
+</body>
+</html>

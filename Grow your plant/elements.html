@@ -1,0 +1,174 @@
+﻿<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>SmartPot</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/weather-icons.min.css" />
+		<link rel="stylesheet" href="assets/css/weather-icons-wind.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.2.0.min.js"></script>
+        <script src="/signalr/hubs"></script>
+        <script src="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/js/metro.min.js"></script>
+
+	</head>
+	<body>
+		<div id="page-wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html" class="icon fa-home">Home</a></li>
+						<li><a href="elements.html" class="icon fa-leaf">Your SmartPot</a></li>
+						<li><a href="contact.html" class="icon fa-envelope">Contact</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Your plant</h2>
+						<p>How's your plant doing?</p>
+						<br/>
+						<a  id="getInstantStaus" class="button alt" style="color:green">Get status</a>
+					</header>
+					<div class="row">
+						<div class="12u">
+
+							<!-- Text 
+							<div class="input-control modern text" style="margin: 50px;">
+					        <input id="firstNameInput" type="number">
+					    </div>
+
+					    <div class="input-control modern text" style="margin: 50px;">
+					        <input id="lastNameInput" type="number">
+					    </div>
+
+					    <div class="input-control modern text" style="margin: 50px;">
+					        <input id="ageInput" type="number">
+					    </div>
+
+					    <button class="button cycle-button" id="addNewStatus">+</button>
+                                -->
+
+					    <ul style="list-style:none;" id="plantStatusesList"></ul>
+
+								<!--section class="box">
+									<h3>Your plant is doing fine <i class="icon fa-smile-o"></i> <i class="icon fa-meh-o"></i> <i class="icon fa-frown-o"></i></h3>
+									<hr/>
+									Temperature: 25°C<br/>
+									Humidity: 43%<br/>
+									Luminosity: 12%<br/>
+								</!--section-->
+						</section>
+                
+                        <script type="text/javascript">
+
+                            $.ajax(
+                             {
+                                 url: '/api/PlantStatuses/GetLastStatuses',
+                                 method: 'GET',
+                                 dataType: 'json',
+                                 success: addPlantStatusesList
+                             });
+
+                            $.ajax({
+                                url: '/api'
+                            })
+
+                            function addPlantStatusesList(plantStatuses) {
+                                $.each(plantStatuses, function (index) {
+                                    var plantStatus = plantStatuses[index];
+                                    addPlantStatus(plantStatus);
+                                });
+                            }
+
+                            function addPlantStatus(plantStatus)
+                            {
+                                $("#plantStatusesList").prepend(
+
+                                    '<section class="box">' +
+                                    '<h3>Here\'s how your plant felt recently: </h3>' + '<hr/>' +
+                                    'Temperature: ' + plantStatus.Temperature + '<br/>' +
+                                    'Humidity: ' + plantStatus.Humidity + '<br/>' +
+                                    'Luminosity: ' + plantStatus.Luminosity + '<br/>' +
+                                    '<h6>'+ plantStatus.StatusTime +'</h6>' +
+                                    '<section/>'
+                                    );
+                            }
+
+                            //Hub
+                            var hub = $.connection.plantStatusHub;
+                            hub.client.publishPost = addPlantStatus;
+
+                            $('#getInstantStaus').click(
+                                    function () {
+                                        $.ajax({
+                                            url: '/api/PlantStatuses/GetInstantStatus',
+                                            method: 'POST',
+                                            dataType: 'json',
+                                            success: addPlantStatus
+                                        });
+
+
+                                    });
+
+                            $('#addNewStatus').click(
+                                   function () {
+                                       var date = Date($.now()).toString().split('G')[0];
+
+                                       var plant =
+                                           {
+                                               Temperature: $('#firstNameInput').val(),
+                                               Humidity: $("#lastNameInput").val(),
+                                               Luminosity: $("#ageInput").val(),
+                                               StatusTime: date
+                                           };
+                                       $.ajax({
+                                           url: '/api/PlantStatuses/AddNewStatus',
+                                           method: 'POST',
+                                           dataType: 'json',
+                                           data: plant
+                                       });
+
+
+                                   });
+
+                            $.connection.hub.start();
+                        </script>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

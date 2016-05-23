@@ -1,176 +1,152 @@
-﻿<!DOCTYPE html>
+﻿<!DOCTYPE HTML>
+
 <html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
+	<head>
+		<title>SmartPot</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/weather-icon.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body class="landing">
+		<div id="page-wrapper">
 
-    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
-    <script src="http://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.2.0.min.js"></script>
-    <script src="/signalr/hubs"></script>
-    <script src="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/js/metro.min.js"></script>
+			<!-- Header -->
+				<header id="header" class="alt">
+          <nav id="nav">
+  					<ul>
+  						<li><a href="index.html" class="icon fa-home">Home</a></li>
+  						<li><a href="elements.html" class="icon fa-leaf">Your SmartPot</a></li>
+  						<li><a href="contact.html" class="icon fa-envelope">Contact</a></li>
+  					</ul>
+  				</nav>
+  			</header>
+			<!-- Banner -->
+				<section id="banner">
+					<h2>SmartPot</h2>
 
-    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro.min.css" rel="stylesheet">
-    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro-responsive.min.css" rel="stylesheet" />
-    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro-schemes.min.css" rel="stylesheet" />
-    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro-rtl.min.css" rel="stylesheet" />
-    <link href="https://cdn.rawgit.com/olton/Metro-UI-CSS/master/build/css/metro-icons.min.css" rel="stylesheet" />
-    <style>
-    .alert-box
-    {
-      background:#ffecec;
-      border:1px solid #f5aca6;
-      color:#8AB446;
-      border-radius:10px;
-      font-family:Tahoma,Geneva,Arial,sans-serif;font-size:11px;
-      padding:10px 10px 10px 36px;
-      margin-left:20%;
-      margin-right:20%;
-      margin-top: 3em;
-    }
-    .alert-box > *
-    {
-      display: inline-block;
-      margin: 0 auto;
-    }
-    </style>
-</head>
-<body bgcolor="#8AB446">
+					<p>Take care of your plants the <b style="color:white; font:bold;">smart</b> way</p>
+					<!--ul class="actions">
+						<li><a href="#" class="button special">Sign Up</a></li>
+						<li><a href="#" class="button">Learn More</a></li>
+					</ul-->
+				</section>
 
-    <div class="app-bar">
-        <ul class="app-bar-menu">
-            <li><a href="index.html">Home</a></li>
-            <li>
-                <a href="" class="dropdown-toggle">Your plants</a>
-                <ul class="d-menu" data-role="dropdown">
-                    <li><a href="">Rose</a></li>
-                    <li><a href="">Cucumber</a></li>
-                    <li><a href="">Lemon Tree</a></li>
-                </ul>
-            </li>
-            <li><a href="">Manage plants</a></li>
-            <li><a href="">Support</a></li>
-            <li><a href="">Help</a></li>
-        </ul>
-    </div>
-    <!--
-  <div class = "alert-box error">
+			<!-- Main -->
+				<section id="main" class="container">
 
-      <div style="width:50%; ">
-          <h2>
-              Looks like your plant needs more *C
-              <br />
-              <small>
-                  Just imagine all the possibilities!
-              </small>
-          </h2>
-      </div>
-      <span class="mif-thermometer mif-4x" ></span>
-  </div>
-  <div class = "alert-box">
-      <div style="width:50%; ">
-          <h2>
-              This is how h1 looks like
-              <br />
-              <small>
-                  Just imagine all the possibilities!
-              </small>
-          </h2>
-      </div>
-    <span class="mif-water mif-4x" style="color: lightskyblue;"></span>
-  </div>
-  <div class = "alert-box error">
-      <div style="width:50%; ">
-          <h2>
-              This is how h1 looks like
-              <br />
-              <small>
-                  Just imagine all the possibilities!
-              </small>
-          </h2>
-      </div>
-    <span class="mif-sun mif-4x" style="color: yellow;"></span>
-  </div>
-        -->
-    <div class="input-control modern text" style="margin: 50px;">
-        <input id="firstNameInput" type="number">
-    </div>
+					<section class="box special">
+						<header class="major">
+							<h2>Introducing the ultimate way
+							<br />
+							to take care of your plants</h2>
+							<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc ornare<br />
+							adipiscing nunc adipiscing. Condimentum turpis massa.</p>
+						</header>
+						<span class="ima  ge featured"><img src="images/pic01.jpg" alt="" /></span>
+					</section>
 
-    <div class="input-control modern text" style="margin: 50px;">
-        <input id="lastNameInput" type="number">
-    </div>
+					<section class="box special features">
+						<div class="features-row">
+							<section>
+								<span class="icon major fa-mobile-phone accent2"></span>
+								<h3>Anywhere, anytime</h3>
+								<p><strong>SmartPot</strong> will send you notifications on your phone, whenever your plants need something.</p>
+							</section>
+							<section>
+								<span class="icon major fa-bar-chart accent3"></span>
+								<h3>Track their evolution</h3>
+								<p>SmartPot allows you to keep track of your plant's necesities evolution. </p>
+							</section>
+						</div>
+						<div class="features-row">
+							<section>
+								<span class="icon major fa-cloud accent4"></span>
+								<h3>Keep your data</h3>
+								<p>SmartPot offers you the posibility to store data about your plant in colud so you can access it anywhere, anytime.</p>
+							</section>
+							<section>
+								<span class="icon major fa-lock accent5"></span>
+								<h3>Enim phasellus</h3>
+								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+							</section>
+						</div>
+					</section>
 
-    <div class="input-control modern text" style="margin: 50px;">
-        <input id="ageInput" type="number"> 
-    </div>
+					<!--div class="row">
+						<div class="6u 12u(narrower)">
 
-    <button class="button cycle-button" id="addNewStatus">+</button>
+							<section class="box special">
+								<span class="image featured"><img src="images/pic02.jpg" alt="" /></span>
+								<h3>Sed lorem adipiscing</h3>
+								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</section>
 
-    <ul style="list-style:none;" id="plantStatusesList"></ul>
+						</div>
+						<div class="6u 12u(narrower)">
 
-    <script type="text/javascript">
+							<section class="box special">
+								<span class="image featured"><img src="images/pic03.jpg" alt="" /></span>
+								<h3>Accumsan integer</h3>
+								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+								<ul class="actions">
+									<li><a href="#" class="button alt">Learn More</a></li>
+								</ul>
+							</section>
 
-        $.ajax(
-            {
-                url: '/api/PlantStatuses/GetLastStatuses',
-                method: 'GET',
-                dataType: 'json',
-                success: addPlantStatusesList
-            });
+						</div>
+					</div-->
 
-        function addPlantStatusesList(plantStatuses)
-        {
-            $.each(plantStatuses, function (index) {
-                var plantStatus = plantStatuses[index];
-                addPlantStatus(plantStatus);
-            });
-        }
+				</section>
 
-        function addPlantStatus(plantStatus)
-        {
-            $("#plantStatusesList").prepend(
-                '<li>' +
-                '<div class = "alert-box error">' +
-                  '<div style="width:50%; ">' +
-                      '<h2>' +
-                          'Temperature: ' + plantStatus.Temperature + '<br>' +
-                          'Luminosity: ' + plantStatus.Luminosity + '<br>' +
-                          'Umidity: ' + plantStatus.Umidity + '<br><br>' +
+			<!-- CTA -->
+				<section id="cta">
 
-                          '<small>' +
-                              plantStatus.StatusTime +
-                          '</small>' +
-                      '</h2>' +
-                  '</div>' +
-             '</div>' +
-             '</li>'
-                );
-            
-        }
+					<h2>Sign up to keep udated</h2>
 
-        var hub = $.connection.plantStatusHub;
-        hub.client.publishPost = addPlantStatus;
+					<form>
+						<div class="row uniform 50%">
+							<div class="8u 12u(mobilep)">
+								<input type="email" name="email" id="email" placeholder="Email Address" />
+							</div>
+							<div class="4u 12u(mobilep)">
+								<input type="submit" value="Sign Up" class="fit" />
+							</div>
+						</div>
+					</form>
 
-        $("#addNewStatus").click(function () {
+				</section>
 
-            var date = Date($.now()).toString().split('G');   
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
 
-            var plant = {
-                Temperature: $("#firstNameInput").val(),
-                Umidity: $("#lastNameInput").val(),
-                Luminosity: $("#ageInput").val(),
-                StatusTime: date[0]
-            };
+		</div>
 
-            $.ajax({
-                url: '/api/PlantStatuses/AddNewStatus',
-                method: 'POST',
-                dataType: 'json',
-                data: plant
-            });
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
 
-        });
-
-        $.connection.hub.start();
-</script>
-</body>
+	</body>
 </html>
